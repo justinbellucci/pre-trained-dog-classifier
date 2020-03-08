@@ -43,7 +43,7 @@ def main():
     # Set start time 
     start_time = time()
     # Sleep for N seconds - Replace with code to time
-    sleep(12)
+    # sleep(1)
     
     # TODO 1: Define get_input_args function within the file get_input_args.py
     # This function retrieves 3 Command Line Arugments from user as input from
