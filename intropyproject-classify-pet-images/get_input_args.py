@@ -42,7 +42,7 @@ def get_input_args():
     # Creates Arguement Parser object named parser
     parser = argparse.ArgumentParser()
     # Argument 1: Path to a folder
-    parser.add_argument('--dir', type = str, default = 'pet_images/', help = 'Path to the folder of pet images')
+    parser.add_argument('--dir', type = str, default = 'intropyproject-classify-pet-images/pet_images', help = 'Path to the folder of pet images')
     # Argument 2: CNN Model Architecture
     parser.add_argument('--arch', type = str, default = 'vgg', help = 'CNN Model Architecture')
     # Argument 3: Text file with valid dognames
