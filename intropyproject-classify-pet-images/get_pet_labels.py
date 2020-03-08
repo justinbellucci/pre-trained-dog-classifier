@@ -40,6 +40,13 @@ def get_pet_labels(image_dir):
       List. The list contains for following item:
          index 0 = pet image label (string)
     """
+
+    # Create an empty dictionary named results_dic
+    results_dic = dict()
+    filename_list = listdir(image_dir)
+    for name in filename_list:
+      results_dic[name] = name.split('_')
     # Replace None with the results_dic dictionary that you created with this
     # function
-    return None
+    print(results_dic)
+    return results_dic
