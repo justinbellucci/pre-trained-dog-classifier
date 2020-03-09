@@ -43,10 +43,25 @@ def get_pet_labels(image_dir):
 
     # Create an empty dictionary named results_dic
     results_dic = dict()
+    # Open the image folder and put contents in a list
     filename_list = listdir(image_dir)
+
     for name in filename_list:
-      results_dic[name] = name.split('_')
-    # Replace None with the results_dic dictionary that you created with this
-    # function
-    print(results_dic)
+        # Set string to lower case letters and assign to new name
+        low_pet_image = name.lower()
+        # Split the string into words by '_' deliminator
+        word_list_pet_image = low_pet_image.split('_')
+        # Creat an empty string
+        pet_name = ""
+
+        # Loop through each word in the list and place only words with letters in the pet_name string
+        for word in word_list_pet_image:
+            if word.isalpha():
+              pet_name += word + " "
+        
+        # Strip off the leading and trailing whitespace
+        pet_name = pet_name.strip()
+        # Assign Key: name, Value: pet_name to results_dic
+        results_dic[name] = pet_name
+        
     return results_dic
