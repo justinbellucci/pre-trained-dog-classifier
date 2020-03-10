@@ -65,13 +65,32 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    # path_list = []
+    # Create empty list to put the classifier labels
     class_label_list = []
-    # path = ""
-    for key, value in results_dic.items():
+    # Use enumerate() to pull out index, key and value.
+    for i, (key, value) in enumerate(results_dic.items()):
+        # Iterate through results_dic key and create a full path for the classifier function 
         path = images_dir + "/" + key
-        class_label = classifier(path, model)
-        class_label_list.append(class_label)
-    
-    print(class_label_list)
+        # Run the classifer function - Returns a classifier label (str) - Set to lowercase, and strip
+        class_label = classifier(path, model).lower().strip()
+        # Append to the classifier label list
+        class_label_list.append(class_label)  
+
+        # Method 1 - Determine if pet labels match the classifier labels
+        if value[0] in class_label_list[i]:
+            # Extend the results_dic value list with the classifier label and 1 (match)
+            results_dic[key].extend([class_label_list[i], 1])
+        # Method 2 - Determine if pet labels match the classifier labels     
+        # if results_dic[key][0] in class_label_list[i]:
+        #     results_dic[key].extend([class_label_list[i], 1])
+        
+        else:
+            # Extend the results_dic value list with the classifier label and 0 (NO match)
+            results_dic[key].extend([class_label_list[i], 0])
+
+        # print(class_label_list[i])
+    # print("\n")
+    # print(class_label_list)
+    # print("\n")
+    # print(results_dic)
 
