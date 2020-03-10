@@ -62,6 +62,6 @@ def get_pet_labels(image_dir):
         # Strip off the leading and trailing whitespace
         pet_name = pet_name.strip()
         # Assign Key: name, Value: pet_name to results_dic
-        results_dic[name] = pet_name
+        results_dic[name] = [pet_name]
         
     return results_dic
