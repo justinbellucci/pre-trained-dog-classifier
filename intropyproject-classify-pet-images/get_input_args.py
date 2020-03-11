@@ -46,7 +46,7 @@ def get_input_args():
     # Argument 2: CNN Model Architecture
     parser.add_argument('--arch', type = str, default = 'vgg', help = 'CNN Model Architecture')
     # Argument 3: Text file with valid dognames
-    parser.add_argument('--dogfile', type = str, default = 'dognames.txt', help = 'Text file with list of valid dog names')
+    parser.add_argument('--dogfile', type = str, default = 'intropyproject-classify-pet-images/dognames.txt', help = 'Text file with list of valid dog names')
 
     # Assigns variable in_args to parse_args()
     in_args = parser.parse_args()
