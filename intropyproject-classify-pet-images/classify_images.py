@@ -67,25 +67,27 @@ def classify_images(images_dir, results_dic, model):
     """
     # Create empty list to put the classifier labels
     class_label_list = []
+
     # Use enumerate() to pull out index, key and value.
     for i, (key, value) in enumerate(results_dic.items()):
         # Iterate through results_dic key and create a full path for the classifier function 
-        path = images_dir + "/" + key
         # Run the classifer function - Returns a classifier label (str) - Set to lowercase, and strip
-        class_label = classifier(path, model).lower().strip()
         # Append to the classifier label list
+        path = images_dir + "/" + key
+        class_label = classifier(path, model).lower().strip()
         class_label_list.append(class_label)  
 
         # Method 1 - Determine if pet labels match the classifier labels
+        # Extend the results_dic value list with the classifier label and 1 (match)
         if value[0] in class_label_list[i]:
-            # Extend the results_dic value list with the classifier label and 1 (match)
             results_dic[key].extend([class_label_list[i], 1])
+        
         # Method 2 - Determine if pet labels match the classifier labels     
         # if results_dic[key][0] in class_label_list[i]:
         #     results_dic[key].extend([class_label_list[i], 1])
         
+        # Extend the results_dic value list with the classifier label and 0 (NO match)
         else:
-            # Extend the results_dic value list with the classifier label and 0 (NO match)
             results_dic[key].extend([class_label_list[i], 0])
 
         # print(class_label_list[i])
