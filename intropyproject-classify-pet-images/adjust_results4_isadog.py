@@ -69,11 +69,32 @@ def adjust_results4_isadog(results_dic, dogfile):
     """           
     # Create empty dictionary to place the dognames.txt data in
     dognames_dic = {}
-    # Import and open the dognames.txt file as d.
+    # Import and open the dognames.txt file as d. and process lines of data
     with open(dogfile) as d:
         for line in d:
             lower_name = line.lower().rstrip()
-            dognames_dic[lower_name] = 1
-    print(dognames_dic)
-  
+            if lower_name not in dognames_dic:
+                dognames_dic[lower_name] = 1
+            else:
+                print("Warning - There shouldn't be any duplicates!")
 
+    # Iterate through the results_dic 
+    for key, value in results_dic.items():
+        # Check to see if the pet label is a dog by comparing to items in dognames_dic
+        if value[0] in dognames_dic:
+            pet_label = 1
+        else:
+            pet_label = 0
+        # Check to see if the classifier label is a dog by comparing to items in dognames_dic
+        if value[1] in dognames_dic:
+            class_label = 1
+        else:
+            class_label = 0
+        # Update results_dic value list with comparison results
+        results_dic[key].extend([pet_label, class_label])
+    # Test printing
+    # print("\n")   
+    # print(results_dic)
+    # print("\n")   
+    # print(dognames_dic)
+  
