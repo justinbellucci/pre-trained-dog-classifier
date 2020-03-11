@@ -50,7 +50,7 @@ def get_input_args():
 
     # Assigns variable in_args to parse_args()
     in_args = parser.parse_args()
-    print("\nArgument 1", in_args.dir)
-    print("\nArgument 2", in_args.arch)
-    print("\nArgument 3", in_args.dogfile)
+    # print("\nArgument 1", in_args.dir)
+    # print("\nArgument 2", in_args.arch)
+    # print("\nArgument 3", in_args.dogfile)
     return in_args
