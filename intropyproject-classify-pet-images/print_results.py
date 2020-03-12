@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/print_results.py
 #                                                                             
-# PROGRAMMER: 
-# DATE CREATED:
+# PROGRAMMER: Justin Bellucci   
+# DATE CREATED: 03_12_2020
 # REVISED DATE: 
 # PURPOSE: Create a function print_results that prints the results statistics
 #          from the results statistics dictionary (results_stats_dic). It 
@@ -62,5 +62,9 @@ def print_results(results_dic, results_stats_dic, model,
     Returns:
            None - simply printing results.
     """    
-    None
+    print("-----------------------")
+    print("CNN model architecture: {}".format(model))
+    print("Number of Images: {}".format(results_stats_dic.get('n_images')))
+    print("Number of Dog Images: {}".format(results_stats_dic.get('n_dogs_img')))
+    print("Number of \'Not-a\' Dog Images: {}".format(results_stats_dic.get('n_notdogs_img')))
                 
