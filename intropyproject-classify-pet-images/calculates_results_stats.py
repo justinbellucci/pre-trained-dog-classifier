@@ -26,11 +26,11 @@
 #          is the statistic's value.  This dictionary should contain the 
 #          following keys:
 #            n_images - number of images
-#            n_dog_imgs - number of dog images
-#            n_notdog_imgs - number of NON-dog images
-#            n_match_pet_class - number of matches between pet & classifier labels
-#            n_correct_dog_imgs - number of correctly classified dog images
-#            n_correct_notdog_imgs - number of correctly classified NON-dog images
+#            n_dogs_img - number of dog images
+#            n_notdogs_img - number of NON-dog images
+#            n_match - number of matches between pet & classifier labels
+#            n_correct_dogs - number of correctly classified dog images
+#            n_correct_notdogs - number of correctly classified NON-dog images
 #            n_correct_breed - number of correctly classified dog breeds
 #            pct_match - percentage of correct matches
 #            pct_correct_dogs - percentage of correctly classified dogs
@@ -71,38 +71,52 @@ def calculates_results_stats(results_dic):
     results_stats_dic = {}
     
     n_images = 0 # number of images 
-    n_dog_imgs = 0 # number of dog images 
-    n_notdog_imgs = 0 # number of NON-dog images 
-    n_match_pet_class = 0 # number of matches between pet and classifier labels
-    n_correct_dog_imgs = 0 # number of correctly classified dog images
-    n_correct_notdog_imgs = 0 # number of correctly classified NON-dog images
+    n_dogs_img = 0 # number of dog images 
+    n_notdogs_img = 0 # number of NON-dog images 
+    n_match = 0 # number of matches between pet and classifier labels
+    n_correct_dogs = 0 # number of correctly classified dog images
+    n_correct_notdogs = 0 # number of correctly classified NON-dog images
     n_correct_breed = 0 # number of correctly classified dog breads 
 
     n_images += len(results_dic)
     for key in results_dic:
         if results_dic[key][3] == 1:
-            n_dog_imgs += 1
+            n_dogs_img += 1
         if results_dic[key][3] == 0:
-            n_notdog_imgs += 1
+            n_notdogs_img += 1
         if results_dic[key][2] == 1:
-            n_match_pet_class += 1
+            n_match += 1
         if results_dic[key][3] == 1 and results_dic[key][4] == 1:
-            n_correct_dog_imgs += 1
+            n_correct_dogs += 1
         if results_dic[key][3] == 0 and results_dic[key][4] == 0:
-            n_correct_notdog_imgs += 1
+            n_correct_notdogs += 1
         if results_dic[key][3] == 1 and results_dic[key][2] == 1:
             n_correct_breed += 1
 
-    pct_match =  n_match_pet_class / n_images * 100 # percentage of correct label matches
-    pct_correct_dogs = n_correct_dog_imgs / n_dog_imgs * 100 # percentage of correctly classified dogs
-    pct_correct_breed = n_correct_breed / n_dog_imgs * 100 # percentage of correctly classified dog breeds
-    pct_correct_notdogs = n_correct_notdog_imgs / n_notdog_imgs * 100 # percentage of correctly classified NON-dogs
+    pct_match =  n_match / n_images * 100 # percentage of correct label matches
+    pct_correct_dogs = n_correct_dogs / n_dogs_img * 100 # percentage of correctly classified dogs
+    pct_correct_breed = n_correct_breed / n_dogs_img * 100 # percentage of correctly classified dog breeds
+    
+    if n_notdogs_img > 0:
+        pct_correct_notdogs = n_correct_notdogs / n_notdogs_img * 100 # percentage of correctly classified NON-dogs
+    else:
+        pct_correct_notdogs = 0
 
     results_stats_dic['n_images'] = n_images
-    results_stats_dic['n_dog_imgs'] = n_dog_imgs
+    results_stats_dic['n_dogs_img'] = n_dogs_img
+    results_stats_dic['n_notdogs_img'] = n_notdogs_img
+    results_stats_dic['n_match'] = n_match
+    results_stats_dic['n_correct_dogs'] = n_correct_dogs
+    results_stats_dic['n_correct_notdogs'] = n_correct_notdogs
+    results_stats_dic['n_correct_breed'] = n_correct_breed
+    results_stats_dic['pct_match'] = pct_match
+    results_stats_dic['pct_correct_dogs'] = pct_correct_dogs
+    results_stats_dic['pct_correct_breed'] = pct_correct_breed
+    results_stats_dic['pct_correct_notdogs'] = pct_correct_notdogs
+    
     print(results_stats_dic)
 
-    return 
+    return results_stats_dic
 
 
 
