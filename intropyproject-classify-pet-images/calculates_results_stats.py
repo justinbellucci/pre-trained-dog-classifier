@@ -68,6 +68,7 @@ def calculates_results_stats(results_dic):
                      and the classroom Item XX Calculating Results for details
                      on how to calculate the counts and statistics.
     """        
+    # Define empty dictionary to put results stats in
     results_stats_dic = {}
     
     n_images = 0 # number of images 
@@ -77,19 +78,26 @@ def calculates_results_stats(results_dic):
     n_correct_dogs = 0 # number of correctly classified dog images
     n_correct_notdogs = 0 # number of correctly classified NON-dog images
     n_correct_breed = 0 # number of correctly classified dog breads 
-
+    
+    # Number of images
     n_images += len(results_dic)
     for key in results_dic:
+        # Number of dog images
         if results_dic[key][3] == 1:
             n_dogs_img += 1
+        # Number of non-dog images
         if results_dic[key][3] == 0:
             n_notdogs_img += 1
+        # Number of label matches
         if results_dic[key][2] == 1:
             n_match += 1
+        # Both labels are of dogs
         if results_dic[key][3] == 1 and results_dic[key][4] == 1:
             n_correct_dogs += 1
+        # Both labels are NOT of dogs
         if results_dic[key][3] == 0 and results_dic[key][4] == 0:
             n_correct_notdogs += 1
+        # Number of correct breed matches
         if results_dic[key][3] == 1 and results_dic[key][2] == 1:
             n_correct_breed += 1
 
