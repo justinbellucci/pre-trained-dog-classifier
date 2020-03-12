@@ -62,9 +62,19 @@ def print_results(results_dic, results_stats_dic, model,
     Returns:
            None - simply printing results.
     """    
-    print("-----------------------")
-    print("CNN model architecture: {}".format(model))
+    # Print overall count of images - Same for all architectures
+    print("\n\n---Results for CNN model architecture",model.upper(),"---\n")
     print("Number of Images: {}".format(results_stats_dic.get('n_images')))
     print("Number of Dog Images: {}".format(results_stats_dic.get('n_dogs_img')))
     print("Number of \'Not-a\' Dog Images: {}".format(results_stats_dic.get('n_notdogs_img')))
-                
+    # Iterate throug the results_stats_dic and print the pecentage calculations. 
+    # Look for keys that have "p" and split the string. Remove the pct prefix and print
+    for key in results_stats_dic:
+        if key[0] == 'p':
+            word_list = key.rsplit('_', -1)     
+            word_list.remove('pct')
+            result_name = ""
+            for word in word_list:
+                result_name += word 
+            print("Percent {}: {:.1f}".format(result_name, results_stats_dic[key]))
+
