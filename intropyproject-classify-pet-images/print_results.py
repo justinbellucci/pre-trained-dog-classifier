@@ -68,7 +68,7 @@ def print_results(results_dic, results_stats_dic, model,
     print("Number of Dog Images: {}".format(results_stats_dic.get('n_dogs_img')))
     print("Number of \'Not-a\' Dog Images: {}".format(results_stats_dic.get('n_notdogs_img')))
     
-    # Iterate throug the results_stats_dic and print the pecentage calculations. 
+    # Iterate through the results_stats_dic and print the pecentage calculations. 
     # Look for keys that have "p" and split the string. Remove the pct prefix and print
     for key in results_stats_dic:
         if key[0] == 'p':
@@ -79,13 +79,22 @@ def print_results(results_dic, results_stats_dic, model,
                 result_name += " " + word 
             print("Percent{}: {:.1f}".format(result_name, results_stats_dic[key]))
     
-    # If print_incorrect_dogs == TRUE and there were images incorrectly classified
-    # print the results 
+    # If print_incorrect_dogs == TRUE 
+    # Labels are misclassified as dogs when both labels aren't in agreement 
+    # regarding whether or not an image is of a dog. 
     if print_incorrect_dogs and ((results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs']) != results_stats_dic['n_images']):
         print("\nINCORRECT Dog/Notdog Assignment:")
 
         for key in results_dic:
             if sum(results_dic[key][3:]) == 1:
-                print("Pet label = {} != Class label = {}".format(results_dic[key][0], results_dic[key][1]))
+                print("\nPet label = {} != Class label = {}".format(results_dic[key][0], results_dic[key][1]))
 
-    # 
+    # If print_incorrect_breed == TRUE. Labels have a misclassification of breeds 
+    # of dog when both labels indicate that the image is a dog; but, labels aren't 
+    # in agreement regarding the dog's breed.
+    if print_incorrect_breed and (results_stats_dic['n_correct_dogs'] != results_stats_dic['n_correct_breed']):
+        print("\nINCORRECT Breed Assignment:")
+
+        for key in results_dic:
+            if sum(results_dic[key][3:]) == 2 and results_dic[key][2] == 0:
+                print("\nPet label = {} /// Class label = {}".format(results_dic[key][0], results_dic[key][1]))
