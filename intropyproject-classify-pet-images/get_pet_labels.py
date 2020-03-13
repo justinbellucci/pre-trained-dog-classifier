@@ -50,9 +50,10 @@ def get_pet_labels(image_dir):
     # Split the string into words by '_' deliminator
     # Creat an empty string
     for name in filename_list:
-        low_pet_image = name.lower()
-        word_list_pet_image = low_pet_image.split('_')
-        pet_name = ""
+        if name[0] != ".":
+            low_pet_image = name.lower()
+            word_list_pet_image = low_pet_image.split('_')
+            pet_name = ""
 
         # Loop through each word in the list and place only words with letters in the pet_name string
         for word in word_list_pet_image:
